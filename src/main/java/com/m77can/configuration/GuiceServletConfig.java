@@ -31,12 +31,12 @@ public class GuiceServletConfig extends GuiceServletContextListener {
             @Override
             protected void initialize() {
                 environmentId("production");
+
                 bindDataSourceProviderType(PooledDataSourceProvider.class);
                 bindTransactionFactoryType(JdbcTransactionFactory.class);
 
-                addSimpleAlias(User.class);
                 addMapperClass(UserMapper.class);
-
+                mapUnderscoreToCamelCase(true);
                 Names.bindProperties(binder(), createProperties());
             }
         };
