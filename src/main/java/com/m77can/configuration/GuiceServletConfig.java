@@ -13,6 +13,7 @@ import com.m77can.service.UserService;
 import com.m77can.service.impl.UserServiceImpl;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import org.mybatis.guice.MyBatisModule;
+import org.mybatis.guice.XMLMyBatisModule;
 import org.mybatis.guice.datasource.builtin.PooledDataSourceProvider;
 
 import javax.servlet.annotation.WebListener;
@@ -27,17 +28,21 @@ public class GuiceServletConfig extends GuiceServletContextListener {
 
 
     private Module createMyBatisModule() {
-        return new MyBatisModule() {
+        return new XMLMyBatisModule() {
             @Override
             protected void initialize() {
-                environmentId("production");
+                setEnvironmentId("development");
+                addProperties(createProperties());
 
-                bindDataSourceProviderType(PooledDataSourceProvider.class);
-                bindTransactionFactoryType(JdbcTransactionFactory.class);
 
-                addMapperClass(UserMapper.class);
-                mapUnderscoreToCamelCase(true);
-                Names.bindProperties(binder(), createProperties());
+//                environmentId("production");
+//
+//                bindDataSourceProviderType(PooledDataSourceProvider.class);
+//                bindTransactionFactoryType(JdbcTransactionFactory.class);
+//
+//                mapUnderscoreToCamelCase(true);
+//                addMapperClasses("com.m77can.mapper");
+//                Names.bindProperties(binder(), createProperties());
             }
         };
     }
@@ -61,7 +66,6 @@ public class GuiceServletConfig extends GuiceServletContextListener {
         properties.put("JDBC.url", "jdbc:mysql://127.0.0.1:3306/user?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true");
         properties.put("JDBC.username", "root");
         properties.put("JDBC.password", "root");
-
         return properties;
     }
 }

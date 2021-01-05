@@ -23,14 +23,21 @@ public class UserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("处理GET请求");
         String userId = httpServletRequest.getParameter("userId");
+        String email = httpServletRequest.getParameter("email");
+        User user;
         //获取输入
         PrintWriter out = response.getWriter();
         //指定输出文件类型和编码
         response.setContentType("application/json");
         //开始输出
 
-        User user = userService.findById(userId);
+        if (userId != null) {
 
+            user = userService.findById(userId);
+        } else {
+            user = userService.findByEmail(email);
+
+        }
         out.println(JsonUtil.toString(user));
     }
 }

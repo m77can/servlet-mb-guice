@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.m77can.mapper.UserMapper">
+
+    <insert id="insert" parameterType="com.m77can.entity.User">
+        INSERT INTO `location_filter` (`id`,
+                                       `username`,
+                                       `email`,
+                                       `create_timestamp`,
+                                       `update_timestamp`)
+        VALUES (#{id},
+                #{username},
+                #{email},
+                #{createTimestamp},
+                #{updateTimestamp})
+    </insert>
+
+    <select id="findByEmail"
+            resultType="com.m77can.entity.User">
+        SELECT *
+        FROM `user`
+        where `email` = #{email}
+    </select>
+</mapper>
+
+

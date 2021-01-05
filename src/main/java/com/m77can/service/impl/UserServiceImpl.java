@@ -24,4 +24,9 @@ public class UserServiceImpl implements UserService {
     public User findById(String id) {
         return userMapper.findById(id);
     }
+
+    @Override
+    public User findByEmail(String email) {
+        return userMapper.findByEmail(email);
+    }
 }

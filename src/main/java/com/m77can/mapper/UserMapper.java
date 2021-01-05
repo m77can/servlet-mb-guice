@@ -9,4 +9,8 @@ public interface UserMapper {
 
     @Select("select * from user where id = #{id}")
     User findById(@Param("id") String id);
+
+    int insert(User user);
+
+    User findByEmail(@Param("email") String email);
 }
