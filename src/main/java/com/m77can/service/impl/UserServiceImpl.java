@@ -1,5 +1,7 @@
 package com.m77can.service.impl;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import com.m77can.entity.User;
 import com.m77can.mapper.UserMapper;
 import com.m77can.service.UserService;

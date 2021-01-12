@@ -3,18 +3,12 @@ package com.m77can.configuration;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.google.inject.name.Names;
 import com.google.inject.servlet.GuiceServletContextListener;
 import com.google.inject.servlet.ServletModule;
 import com.m77can.controller.UserServlet;
-import com.m77can.entity.User;
-import com.m77can.mapper.UserMapper;
 import com.m77can.service.UserService;
 import com.m77can.service.impl.UserServiceImpl;
-import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
-import org.mybatis.guice.MyBatisModule;
 import org.mybatis.guice.XMLMyBatisModule;
-import org.mybatis.guice.datasource.builtin.PooledDataSourceProvider;
 
 import javax.servlet.annotation.WebListener;
 import java.util.Properties;
@@ -52,9 +46,7 @@ public class GuiceServletConfig extends GuiceServletContextListener {
             @Override
             protected void configureServlets() {
                 serve("/users").with(UserServlet.class);
-
                 bind(UserService.class).to(UserServiceImpl.class);
-
             }
         };
     }
